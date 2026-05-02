@@ -78,6 +78,7 @@ jobs:
         run: |
           python preprocessing/automate_Fierda.py
           # Copy dataset to MLProject folder
+          mkdir -p MLProject_folder
           cp preprocessing/creditcard_preprocessed.csv MLProject_folder/creditcard_preprocessed.csv
 
       - name: Run Training via MLflow Project
