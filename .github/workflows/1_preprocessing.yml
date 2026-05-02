@@ -3,8 +3,8 @@ name: 1. Preprocessing Pipeline
 on:
   workflow_dispatch:
   push:
-    paths:
-      - 'preprocessing/automate_Fierda.py'
+    branches:
+      - main
 
 jobs:
   preprocess:
