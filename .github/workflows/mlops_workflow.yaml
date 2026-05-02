@@ -88,7 +88,7 @@ jobs:
           MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
           cd MLProject_folder
-          mlflow run . --no-conda
+          mlflow run . --env-manager=local
 
       - name: Save Artifacts to Repository
         run: |
