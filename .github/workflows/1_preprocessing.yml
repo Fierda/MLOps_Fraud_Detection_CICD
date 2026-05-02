@@ -43,6 +43,6 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add preprocessing/creditcard_preprocessing.csv
+          git add preprocessing/creditcard_preprocessed.csv
           git diff --cached --quiet || git commit -m "chore: update preprocessed dataset [automated]"
           git push

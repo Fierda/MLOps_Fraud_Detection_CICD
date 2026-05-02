@@ -1,15 +1,3 @@
-"""
-Automated Preprocessing Pipeline - Credit Card Fraud Detection
-Student Name: Fierda
-
-Steps:
-1. Download dataset from Kaggle
-2. Load data
-3. Exploratory checks
-4. Preprocessing (cleaning, scaling, balancing)
-5. Export ready-to-train dataset
-"""
-
 import os
 import sys
 import subprocess
@@ -17,7 +5,6 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
-# Auto-install kaggle if not present
 try:
     import kaggle
 except ImportError:
@@ -29,14 +16,6 @@ except ImportError:
 # 1. DOWNLOAD DATASET
 # ---------------------------------------------------------------------------
 def download_dataset(output_dir):
-    """
-    Download Credit Card Fraud Detection dataset from Kaggle.
-    Dataset: https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
-
-    Authentication via environment variables:
-      - KAGGLE_USERNAME
-      - KAGGLE_KEY
-    """
     raw_path = os.path.join(output_dir, "creditcard.csv")
 
     if os.path.exists(raw_path):
@@ -46,7 +25,6 @@ def download_dataset(output_dir):
     print("[INFO] Downloading dataset from Kaggle...")
     os.makedirs(output_dir, exist_ok=True)
 
-    # Read credentials from environment variables
     kaggle_username = os.environ.get("KAGGLE_USERNAME")
     kaggle_key = os.environ.get("KAGGLE_KEY")
 
@@ -58,7 +36,6 @@ def download_dataset(output_dir):
         print("         (Or add to GitHub Secrets if running via CI)")
         sys.exit(1)
 
-    # Inject into env so kaggle library can read it
     os.environ["KAGGLE_USERNAME"] = kaggle_username
     os.environ["KAGGLE_KEY"] = kaggle_key
 
@@ -79,7 +56,6 @@ def download_dataset(output_dir):
 # 2. LOAD DATA
 # ---------------------------------------------------------------------------
 def load_data(filepath):
-    """Load raw CSV dataset."""
     print(f"\n[INFO] Loading data from: {filepath}")
     df = pd.read_csv(filepath)
     print(f"  Shape       : {df.shape}")
@@ -92,7 +68,6 @@ def load_data(filepath):
 # 3. EXPLORATORY CHECKS (automated summary)
 # ---------------------------------------------------------------------------
 def exploratory_checks(df):
-    """Print basic statistical summary (automated EDA section)."""
     print("\n========== EXPLORATORY CHECKS ==========")
     print(f"  Missing values total : {df.isnull().sum().sum()}")
     print(f"  Duplicate rows       : {df.duplicated().sum()}")
@@ -111,16 +86,6 @@ def exploratory_checks(df):
 # 4. PREPROCESSING
 # ---------------------------------------------------------------------------
 def preprocess(df):
-    """
-    Preprocessing pipeline:
-      a. Remove missing values (if any)
-      b. Remove duplicate rows
-      c. Feature scaling on 'Amount' and 'Time'
-      d. Undersampling majority class (3:1 ratio)
-    
-    Returns:
-        pd.DataFrame: Cleaned and balanced dataset.
-    """
     print("\n[INFO] Starting preprocessing...")
     df_clean = df.copy()
 
